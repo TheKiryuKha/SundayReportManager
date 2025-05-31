@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Action\CreatePoint;
 use Illuminate\Console\Command;
+use function Laravel\Prompts\textarea;
 
 class SavePoint extends Command
 {
@@ -12,7 +13,7 @@ class SavePoint extends Command
      *
      * @var string
      */
-    protected $signature = 'report:save {point}';
+    protected $signature = 'report:save';
 
     /**
      * The console command description.
@@ -26,6 +27,8 @@ class SavePoint extends Command
      */
     public function handle(CreatePoint $action)
     {
-        $action->handle((string) $this->argument('point'));
+        $point = textarea('Write the point:');
+
+        $action->handle($point);
     }
 }
